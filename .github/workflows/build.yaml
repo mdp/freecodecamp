@@ -18,9 +18,6 @@ jobs:
   build_node:
     runs-on: ubuntu-latest
     name: Install dependencies with yarn
-    defaults:
-        run:
-          working-directory: client
     steps:
     - uses: actions/setup-node@v3
       with:
