@@ -4,10 +4,10 @@ on: push
 jobs:
   build_python:
     runs-on: ubuntu-latest
+    name: Install dependencies with pip
     defaults:
         run:
           working-directory: openzim
-    name: Install the dependencies for this project
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v4
@@ -17,13 +17,15 @@ jobs:
     - run: pip install -r requirements.txt
   build_node:
     runs-on: ubuntu-latest
+    name: Install dependencies with yarn
     defaults:
         run:
           working-directory: client
     steps:
     - uses: actions/setup-node@v3
       with:
-        node-version: 16
+        node-version: 18
+        cache: 'yarn'
     - run: yarn install
     - run: yarn lint
     - run: yarn test
