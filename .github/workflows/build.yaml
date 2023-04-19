@@ -20,12 +20,13 @@ jobs:
     name: Install dependencies with yarn
     defaults:
         run:
-          working-directory: web
+          working-directory: client
     steps:
+    - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
         node-version: 18
-    - run: pwd
+        cache: 'yarn'
     - run: yarn install
     - run: yarn lint
     - run: yarn test
