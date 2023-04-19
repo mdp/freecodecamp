@@ -20,7 +20,7 @@ jobs:
     name: Install dependencies with yarn
     defaults:
         run:
-          working-directory: client
+          working-directory: web
     steps:
     - uses: actions/setup-node@v3
       with:
