@@ -27,6 +27,8 @@ jobs:
       with:
         node-version: 18
         cache: 'yarn'
-    - run: yarn install
+        cache-dependency-path: '**/yarn.lock'
+    - run: pwd
+    - run: yarn install --frozen-lockfile
     - run: yarn lint
     - run: yarn test
