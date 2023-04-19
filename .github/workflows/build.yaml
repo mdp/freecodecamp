@@ -2,7 +2,7 @@ name: Build the FCC zim file
 
 on: push
 jobs:
-  build_python:
+  build_zim_file:
     runs-on: ubuntu-latest
     name: Install dependencies with pip
     defaults:
@@ -15,20 +15,16 @@ jobs:
         python-version: '3.11'
         cache: 'pip' # caching pip dependencies
     - run: pip install -r requirements.txt
-  build_node:
-    runs-on: ubuntu-latest
-    name: Install dependencies with yarn
-    defaults:
-        run:
-          working-directory: client
-    steps:
-    - uses: actions/checkout@v3
+      working-directory: openzim
+
     - uses: actions/setup-node@v3
       with:
         node-version: 18
         cache: 'yarn'
         cache-dependency-path: '**/yarn.lock'
-    - run: pwd
     - run: yarn install --frozen-lockfile
+      working-directory: client
     - run: yarn lint
+      working-directory: client
     - run: yarn test
+      working-directory: client
