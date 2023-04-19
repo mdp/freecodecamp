@@ -5,9 +5,6 @@ jobs:
   build_zim_file:
     runs-on: ubuntu-latest
     name: Install dependencies with pip
-    defaults:
-        run:
-          working-directory: openzim
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v4
@@ -28,3 +25,11 @@ jobs:
       working-directory: client
     - run: yarn test
       working-directory: client
+    - run: python3 fetch.py --filter=02-javascript
+      working-directory: openzim
+    - run: python3 prebuild.py basic-javascript ../client/src/assets/curriculum
+      working-directory: openzim
+    - run: yarn build
+      working-directory: client
+    - run: python3 ./fcc2zim --source-dir=../client/dist --zim
+      working-directory: openzim
